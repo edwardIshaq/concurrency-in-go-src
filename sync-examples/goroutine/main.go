@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	goroutineSize()
+	// goroutineSize()
+	lockStep()
 }
 
 func example1() {
