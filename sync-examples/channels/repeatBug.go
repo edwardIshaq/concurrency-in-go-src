@@ -6,6 +6,13 @@ import (
 )
 
 func repeat(done <-chan interface{}, value interface{}) <-chan interface{} {
+	valueFunc := func() interface{} {
+		return value
+	}
+	return repeatFunc(done, valueFunc)
+}
+
+func repeatFunc(done <-chan interface{}, fun func() interface{}) <-chan interface{} {
 	output := make(chan interface{})
 	go func() {
 		defer func() {
@@ -16,7 +23,7 @@ func repeat(done <-chan interface{}, value interface{}) <-chan interface{} {
 			select {
 			case <-done:
 				return
-			case output <- value:
+			case output <- fun():
 			}
 		}
 	}()
@@ -27,7 +34,7 @@ func main() {
 	fmt.Println("start")
 	startTime := time.Now()
 	done := make(chan interface{})
-	repeatChan := repeat(done, "spin")
+	repeatChan := repeat(done, "doing work")
 	timerChan := time.After(10 * time.Millisecond)
 loop:
 	for {
