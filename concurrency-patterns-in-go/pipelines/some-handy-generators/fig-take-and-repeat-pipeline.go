@@ -24,6 +24,7 @@ func main() {
 		}()
 		return valueStream
 	}
+
 	take := func(
 		done <-chan interface{},
 		valueStream <-chan interface{},

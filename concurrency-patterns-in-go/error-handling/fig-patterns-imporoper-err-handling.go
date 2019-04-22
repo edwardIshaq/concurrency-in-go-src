@@ -32,7 +32,7 @@ func main() {
 	done := make(chan interface{})
 	defer close(done)
 
-	urls := []string{"https://www.google.com", "https://badhost"}
+	urls := []string{"https://www.google.com", "https://badhost", "https://slack.com"}
 	for response := range checkStatus(done, urls...) {
 		fmt.Printf("Response: %v\n", response.Status)
 	}

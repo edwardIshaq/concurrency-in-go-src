@@ -1,6 +1,6 @@
 package pipelines
 
-import ()
+import "testing"
 
 func BenchmarkGeneric(b *testing.B) {
 	repeat := func(
@@ -40,6 +40,7 @@ func BenchmarkGeneric(b *testing.B) {
 		}()
 		return takeStream
 	}
+
 	toString := func(
 		done <-chan interface{},
 		valueStream <-chan interface{},
